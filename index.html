@@ -9,6 +9,17 @@ layout: default
 TOAD is a planning system for Totally Ordered (TO) HTN planning. It translates the problem to a classical planning problem. For a subclass of TO problems, this is possible without relaxation, e.g., the solution found for the generated classical problem is guaranteed to be a solution for the HTN planning problem. Due to the differences in expressivity, this is not always possible. When it is not, the problem is transformed into a classical planning problem that has a superset of solutions, i.e. the plan found by the classical problem is not necessarily a solution for the HTN planning problem. TOAD provides a verification mechanism to check whether it is a plan or not. 
 </p>
 
+<p>
+  To use the planner, perform the following steps: 
+  <ul>
+    <li>Ground the problem using the PANDA grounder. Let ground.panda be the file with the grounded model.</li>
+    <li>Call TOAD: toad ground.panda. TOAD generates a classical planning problem. It uses the sas+ format used by Fast Downward as standard output format. Let problem.sas be that file.</li>
+    <li>Use Fast Downward with your favorit configuration to solve that problem, e.g.: ./downward --evaluator 'hff=ff()' --search 'lazy_greedy([hff], preferred=[hff])' --internal-plan-file sas_plan < problem.sas. Let sas_plan be the generated solution.</li>
+    <li>From the output of step 2 it can be seen whether the translation used an approximation. If it did, perform the following steps to verify whether the solution is also one for the HTN planning problem.</li>
+    <li>Generate a verification problem using toad -v ground.panda sas_plan</li>
+    <li>The output of this process is a usual HTN planning problem. It has a solution if and only if the solution is a solution for the HTN planning problem. We used the progression search of the HTN planning system PANDA to solve it. Usually, a configuration using DFS will solve it (use a heuristic search if this fails).</li>
+  </ul>
+</p>
 <ul>
 <li><a href="http://fai.cs.uni-saarland.de/hoeller/index.html">D. H&ouml;ller</a>. <strong>Translating Totally Ordered HTN Planning Problems to Classical Planning Problems Using Regular Approximation of Context-Free Languages</strong>. In: Proceedings of the 31st International Conference on Automated Planning and Scheduling (ICAPS). AAAI Press, 2021.</li>
 </ul>
