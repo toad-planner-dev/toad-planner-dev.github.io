@@ -13,8 +13,8 @@ TOAD is a planning system for Totally Ordered (TO) HTN planning. It translates t
   To use the planner, perform the following steps: 
   <ul>
     <li>Ground the problem using the <a href="https://toad-planner-dev.github.io/">PANDA grounder</a>. Let ground.panda be the file with the grounded model.</li>
-    <li>Call TOAD: toad ground.panda. TOAD generates a classical planning problem. It uses the sas+ format used by Fast Downward as standard output format. Let problem.sas be that file.</li>
-    <li>Use Fast Downward with your favorit configuration to solve that problem, e.g.: ./downward --evaluator 'hff=ff()' --search 'lazy_greedy([hff], preferred=[hff])' --internal-plan-file sas_plan < problem.sas. Let sas_plan be the generated solution.</li>
+    <li>Call TOAD: toad ground.panda. TOAD generates a classical planning problem. It uses the sas+ format used by <a href="http://www.fast-downward.org/">Fast Downward</a> as standard output format. Let problem.sas be that file.</li>
+    <li>Use <a href="http://www.fast-downward.org/">Fast Downward</a> with your favorit configuration to solve that problem, e.g.: ./downward --evaluator 'hff=ff()' --search 'lazy_greedy([hff], preferred=[hff])' --internal-plan-file sas_plan < problem.sas. Let sas_plan be the generated solution.</li>
     <li>From the output of step 2 it can be seen whether the translation used an approximation. If it did, perform the following steps to verify whether the solution is also one for the HTN planning problem.</li>
     <li>Generate a verification problem using toad -v ground.panda sas_plan</li>
     <li>The output of this process is a usual HTN planning problem. It has a solution if and only if the solution is a solution for the HTN planning problem. We used the progression search of the HTN planning system PANDA to solve it. Usually, a configuration using DFS will solve it (use a heuristic search if this fails).</li>
