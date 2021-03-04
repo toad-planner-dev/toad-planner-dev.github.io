@@ -12,7 +12,7 @@ TOAD is a planning system for Totally Ordered (TO) HTN planning. It translates t
 <p>
   To use the planner, perform the following steps: 
   <ul>
-    <li>Ground the problem using the PANDA grounder. Let ground.panda be the file with the grounded model.</li>
+    <li>Ground the problem using the <a href="https://toad-planner-dev.github.io/">PANDA grounder</a>. Let ground.panda be the file with the grounded model.</li>
     <li>Call TOAD: toad ground.panda. TOAD generates a classical planning problem. It uses the sas+ format used by Fast Downward as standard output format. Let problem.sas be that file.</li>
     <li>Use Fast Downward with your favorit configuration to solve that problem, e.g.: ./downward --evaluator 'hff=ff()' --search 'lazy_greedy([hff], preferred=[hff])' --internal-plan-file sas_plan < problem.sas. Let sas_plan be the generated solution.</li>
     <li>From the output of step 2 it can be seen whether the translation used an approximation. If it did, perform the following steps to verify whether the solution is also one for the HTN planning problem.</li>
